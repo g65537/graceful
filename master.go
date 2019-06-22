@@ -54,8 +54,8 @@ func (m *master) run() error {
 
 func (m *master) waitSignal() {
 	ch := make(chan os.Signal)
-	sigs := make([]os.Signal, 0, len(m.opt.reloadSignals)+len(m.opt.stopSignals))
-	for _, s := range m.opt.reloadSignals {
+	sigs := make([]os.Signal, 0, len(m.opt.restartSignals)+len(m.opt.stopSignals))
+	for _, s := range m.opt.restartSignals {
 		sigs = append(sigs, s)
 	}
 	for _, s := range m.opt.stopSignals {
@@ -82,7 +82,7 @@ func (m *master) waitSignal() {
 			log.Printf("master got signal: %v\n", sig)
 		}
 
-		for _, s := range m.opt.reloadSignals {
+		for _, s := range m.opt.restartSignals {
 			if s == sig {
 				m.reload()
 				break

@@ -31,11 +31,6 @@ type worker struct {
 	sync.Mutex
 }
 
-type server struct {
-	*http.Server
-	listener net.Listener
-}
-
 func (w *worker) run() error {
 	// init servers with fds from master
 	err := w.initServers()
@@ -118,7 +113,7 @@ func (w *worker) watchMaster() error {
 			w.stop()
 			break
 		}
-		time.Sleep(w.opt.watchInterval)
+		time.Sleep(w.opt.healthChkInterval)
 	}
 	w.stopCh <- struct{}{}
 	return nil

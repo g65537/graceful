@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/kuangchanglang/graceful"
+	"github.com/g65537/graceful"
 )
 
 type handler struct {
